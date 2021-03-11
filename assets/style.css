@@ -1,0 +1,27 @@
+body {
+    background-color: lightcyan;
+    font-family: sans-serif;
+}
+
+#quizcontainer {
+    background-color: ghostwhite;
+    border: 2px dashed dimgray;
+    color: #000;
+    margin: 200px;
+    padding: 100px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+button {
+    color:ghostWhite;
+    padding:10px;
+    background-color:dodgerBlue;
+    border-radius:5px;
+    border:none;
+    font-size:20px;
+    margin:15px;
+    display: block;
+    position: relative;
+    left: 25%;
+}
