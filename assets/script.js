@@ -194,39 +194,39 @@ buttonD.addEventListener("click", function () {
 var scores = [JSON.parse(localStorage.getItem('info'))];
 var newScore = [{ person: initials.value, score: secondsLeft }];
 
-function addHighScore() {
-    scores.push();
+// function addHighScore() {
+//     scores.push();
 
-    localStorage.setItem("info", JSON.stringify(scores));
+//     localStorage.setItem("info", JSON.stringify(scores));
 
-    showHighscores();
-};
+//     showHighscores();
+// };
 
-submit.addEventListener("click", addHighScore());
+// submit.addEventListener("click", addHighScore());
 
-var j;
-var clear;
-var listItem;
+// var j;
+// var clear;
+// var listItem;
 
-function showHighscores() {
-    title.textContent = "High Scores"
-    if (scores.length > 0) { scores.sort((a, b) => b.score - a.score) };
+// function showHighscores() {
+//     title.textContent = "High Scores"
+//     if (scores.length > 0) { scores.sort((a, b) => b.score - a.score) };
 
-    console.log(scores);
+//     console.log(scores);
 
-    container.appendChild(highscores);
+//     container.appendChild(highscores);
 
-    for (j = 0; j < scores.length; j++) {
-        listItem = document.createElement("li");
-        listItem.textContent = scores[j].player + ".........." + scores[j].score;
-        highscores.appendChild(listItem);
-    }
+//     for (j = 0; j < scores.length; j++) {
+//         listItem = document.createElement("li");
+//         listItem.textContent = scores[j].player + ".........." + scores[j].score;
+//         highscores.appendChild(listItem);
+//     }
 
-    intro.setAttribute("style", "display:none;")
-    startButton.textContent = "Play Again?";
+//     intro.setAttribute("style", "display:none;")
+//     startButton.textContent = "Play Again?";
 
-    initials.setAttribute("style", "display:none;");
-    submit.setAttribute("style", "display:none;");
-}
+//     initials.setAttribute("style", "display:none;");
+//     submit.setAttribute("style", "display:none;");
+// }
 
-highscores.setAttribute("style", "display:none")
+// highscores.setAttribute("style", "display:none")
