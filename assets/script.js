@@ -1,3 +1,4 @@
+var body = document.getElementById("body");
 var container = document.getElementById("quizcontainer");
 var title = document.createElement("h1");
 var intro = document.createElement("p");
@@ -15,6 +16,8 @@ var secondsLeft;
 var timer = document.createElement("p");
 // input for highscores
 var initials = document.createElement("input");
+var submit = document.createElement("button");
+var highscores = document.createElement("ol");
 
 var questions = [
     {
@@ -48,6 +51,7 @@ title.textContent = "Test Your Coding Knowledge";
 intro.textContent = "Try to answer the following questions without Googling. For each incorrect answer, 10 seconds will be deducted from the timer.";
 startButton.textContent = "Start Quiz!";
 answer.textContent = "";
+submit.textContent = "submit";
 
 container.appendChild(title);
 container.appendChild(intro);
@@ -55,18 +59,17 @@ container.appendChild(startButton);
 container.appendChild(buttonBox);
 container.appendChild(answer);
 
-startButton.setAttribute("style", "position:relative; left:43%;")
-title.setAttribute("style", "font-size:30px; padding:10px;")
-intro.setAttribute("style", "font-size:20px; line-height:25px;")
-answer.setAttribute("style", "font-size:25px; font-weight:bold; color:steelBlue;")
+title.setAttribute("style", "font-size:2.25vw; padding:1vw;");
+intro.setAttribute("style", "font-size:1.25vw; line-height:1.5vw;");
+answer.setAttribute("style", "font-size:1.5vw; font-weight:bold; color:dimGray;");
+
+initials.setAttribute("type", "text");
+initials.setAttribute("placeholder", "please enter your initials");
 
 buttonA.setAttribute("class", "choice");
 buttonB.setAttribute("class", "choice");
 buttonC.setAttribute("class", "choice");
 buttonD.setAttribute("class", "choice");
-
-initials.setAttribute("type","textbox");
-initials.setAttribute("placeholder", "AAA");
 
 function timeUp() {
     title.textContent = "Game Over!"
@@ -78,12 +81,13 @@ function timeUp() {
 
     timer.setAttribute("style", "display:none;")
 
-    startButton.setAttribute("style", "display:block; position:relative; left:43%;");
+    startButton.setAttribute("style", "display:inline; position:relative; left:43%;");
     startButton.textContent = "Try Again?"
 
 }
 
 var i;
+var timerFunction;
 
 function multipleChoice(number) {
     i = number;
@@ -110,7 +114,8 @@ startButton.addEventListener("click", function () {
 
     container.appendChild(timer);
 
-    var timerFunction = setInterval(function () {
+
+    timerFunction = setInterval(function () {
         secondsLeft--;
         timer.textContent = secondsLeft + " seconds remaining";
         if (secondsLeft <= 0) {
@@ -126,20 +131,27 @@ function nextQuestion() {
     if (i < 4) {
         i++
         multipleChoice(i);
+    } else {
+        clearInterval(timerFunction);
+
+        title.textContent = "Your Score: " + secondsLeft;
+        container.appendChild(initials);
+        container.appendChild(submit);
+
+        initials.setAttribute("style", "display:inline;");
+        submit.setAttribute("style", "display:inline;")
+
+        buttonBox.setAttribute("style", "display:none;")
+        timer.setAttribute("style", "display:none;")
+
     }
-    setTimeout(function(){
+
+    setTimeout(function () {
         answer.textContent = "";
     }, 1000)
-
-    if (i > 4) {
-        // hide everything
-        // textbox for initials --> high score when entered
-        // high score screen w/ option to clear
-        buttonBox.setAttribute = ("style", "display:none;")
-    }
 }
 
-buttonA.addEventListener("click", function() {
+buttonA.addEventListener("click", function () {
     if (this.textContent === questions[i].correctAnswer) {
         answer.textContent = "Correct!";
     } else {
@@ -149,7 +161,7 @@ buttonA.addEventListener("click", function() {
     nextQuestion();
 })
 
-buttonB.addEventListener("click", function() {
+buttonB.addEventListener("click", function () {
     if (this.textContent === questions[i].correctAnswer) {
         answer.textContent = "Correct!"
     } else {
@@ -159,7 +171,7 @@ buttonB.addEventListener("click", function() {
     nextQuestion();
 })
 
-buttonC.addEventListener("click", function() {
+buttonC.addEventListener("click", function () {
     if (this.textContent === questions[i].correctAnswer) {
         answer.textContent = "Correct!"
     } else {
@@ -169,7 +181,7 @@ buttonC.addEventListener("click", function() {
     nextQuestion();
 })
 
-buttonD.addEventListener("click", function() {
+buttonD.addEventListener("click", function () {
     if (this.textContent === questions[i].correctAnswer) {
         answer.textContent = "Correct!"
     } else {
@@ -179,9 +191,42 @@ buttonD.addEventListener("click", function() {
     nextQuestion();
 })
 
+var scores = [JSON.parse(localStorage.getItem('info'))];
+var newScore = [{ person: initials.value, score: secondsLeft }];
 
+function addHighScore() {
+    scores.push();
 
+    localStorage.setItem("info", JSON.stringify(scores));
 
+    showHighscores();
+};
 
+submit.addEventListener("click", addHighScore());
 
+var j;
+var clear;
+var listItem;
 
+function showHighscores() {
+    title.textContent = "High Scores"
+    if (scores.length > 0) { scores.sort((a, b) => b.score - a.score) };
+
+    console.log(scores);
+
+    container.appendChild(highscores);
+
+    for (j = 0; j < scores.length; j++) {
+        listItem = document.createElement("li");
+        listItem.textContent = scores[j].player + ".........." + scores[j].score;
+        highscores.appendChild(listItem);
+    }
+
+    intro.setAttribute("style", "display:none;")
+    startButton.textContent = "Play Again?";
+
+    initials.setAttribute("style", "display:none;");
+    submit.setAttribute("style", "display:none;");
+}
+
+highscores.setAttribute("style", "display:none")

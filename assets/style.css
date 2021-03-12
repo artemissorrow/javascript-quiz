@@ -7,8 +7,8 @@ body {
     background-color: ghostwhite;
     border: 2px dashed dimgray;
     color: #000;
-    margin: 200px;
-    padding: 100px;
+    margin: 10vw;
+    padding: 5vw;
     border-radius: 15px;
     text-align: center;
 }
@@ -17,11 +17,8 @@ button {
     color:ghostWhite;
     padding:10px;
     background-color:dodgerBlue;
-    border-radius:5px;
     border:none;
-    font-size:20px;
-    margin:15px;
-    display: block;
-    position: relative;
-    left: 25%;
+    font-size:1.25vw;
+    margin:1vw;
+    display: inline;
 }
