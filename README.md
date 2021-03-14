@@ -8,6 +8,6 @@ At some point the text input for the player's initials stopped functioning, and 
 
 The high score function had other problems, but it did sort of work at some point and when that button stopped working, that was the end of that.
 
-!(screenshot)[./assets/Screenshot2021-03-11-2021]
+!(screenshot)[./assets/Screenshot2021-03-11-2021.jpg]
 
 https://artemissorrow.github.io/javascript-quiz/
